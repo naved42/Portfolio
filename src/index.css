@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+@theme {
+  --color-page-bg: #FBFBFA;
+  --color-panel-bg: #FFFFFF;
+  --color-soft-card: #F4F4F2;
+  --color-soft-card-2: #F8F8F6;
+  --color-white-card: #FFFFFF;
+  --color-white-soft: #FBFBFA;
+  --color-text: #0A252E;
+  --color-muted: #505A5F;
+  --color-muted-light: #949CA0;
+  --color-line: #E2E4E5;
+  --color-black: #0A252E;
+  --color-deep-black: #061A21;
+  --color-accent-green: #15803D;
+
+  --font-lightmode: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Roboto", sans-serif;
+  --font-darkmode: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer utilities {
+  .font-display { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Roboto", sans-serif; }
+  .font-h1 { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Roboto", sans-serif; }
+  .font-h2 { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Roboto", sans-serif; }
+  .font-h3 { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Roboto", sans-serif; }
+  .font-body-lg { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Roboto", sans-serif; }
+  .font-body-md { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Roboto", sans-serif; }
+  .font-label { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Roboto", sans-serif; }
+
+  .text-display { font-size: clamp(40px, 5.5vw, 82px); line-height: 1.08; letter-spacing: -0.04em; font-weight: 600; }
+  .text-h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; }
+  .text-h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.25; letter-spacing: -0.02em; font-weight: 500; }
+  .text-h3 { font-size: clamp(18px, 2.5vw, 24px); line-height: 1.35; letter-spacing: -0.01em; font-weight: 500; }
+  .text-body-lg { font-size: 18px; line-height: 1.72; font-weight: 400; }
+  .text-body-md { font-size: 15px; line-height: 1.68; font-weight: 400; }
+  .text-label { font-size: 12px; line-height: 1.2; letter-spacing: 0.05em; font-weight: 600; }
+
+  .px-margin { padding-left: clamp(16px, 4vw, 40px); padding-right: clamp(16px, 4vw, 40px); }
+  .px-sm { padding-left: 16px; padding-right: 16px; }
+  .px-xs { padding-left: 8px; padding-right: 8px; }
+  .py-xs { padding-top: 8px; padding-bottom: 8px; }
+  .gap-md { gap: 32px; }
+  .mb-lg { margin-bottom: 64px; }
+  .mb-md { margin-bottom: 32px; }
+  .py-xl { padding-top: 64px; padding-bottom: 64px; }
+  .pb-xl { padding-bottom: 64px; }
+  .mt-section { margin-top: 120px; }
+}
+
+/* Continuous Marquee Animations */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 35s linear infinite;
+}
+
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* Monospace font isolation for all code blocks, pre, code tags, and font-mono utilities */
+.font-mono,
+code,
+pre,
+.code-block {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+  line-height: 1.7 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  background-color: #FBFBFA;
+  color: #0A252E;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Roboto", sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Base Light Mode utility mappings to match color palette breakdown */
+.bg-\[\#FAF9F5\] {
+  background-color: #FBFBFA !important;
+}
+
+.bg-\[\#F0EFEB\] {
+  background-color: #FFFFFF !important;
+}
+
+.text-\[\#1B1B1B\] {
+  color: #0A252E !important;
+}
+
+.text-\[\#8C8880\] {
+  color: #505A5F !important;
+}
+
+.bg-\[\#181818\] {
+  background-color: #0A252E !important;
+}
+
+.border-\[\#D9D7D0\] {
+  border-color: #E2E4E5 !important;
+}
+
+/* Dark Mode Theme Engine */
+html.dark body, body.dark {
+  background: linear-gradient(45deg, #131c26 0%, #1a2634 100%) !important;
+  background-attachment: fixed !important;
+  color: #F3F4F6;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+html.dark .font-display,
+html.dark .font-h1,
+html.dark .font-h2,
+html.dark .font-h3,
+html.dark .font-body-lg,
+html.dark .font-body-md,
+html.dark .font-label {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Enforce no font weights below 400 in dark mode to prevent bleeding */
+html.dark * {
+  font-weight: max(400, var(--tw-font-weight, 400));
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0B0F17;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #2D3748;
+}
+
+/* Dark Mode Containers & Section Backgrounds */
+html.dark .bg-\[\#FAF9F5\] {
+  background-color: transparent !important;
+}
+
+html.dark .bg-\[\#F0EFEB\] {
+  background-color: rgba(30, 41, 59, 0.7) !important;
+  backdrop-filter: blur(8px);
+}
+
+html.dark .bg-\[\#FFFDF8\] {
+  background-color: rgba(51, 65, 85, 0.6) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Dark Mode Text Colors */
+html.dark .text-\[\#1B1B1B\],
+html.dark .text-\[\#181818\] {
+  color: #F3F4F6 !important;
+}
+
+html.dark .text-\[\#8C8880\] {
+  color: #CBD5E1 !important;
+}
+
+html.dark .text-\[\#1B1B1B\]\/80,
+html.dark .text-\[\#1B1B1B\]\/90 {
+  color: #E2E8F0 !important;
+}
+
+html.dark .text-\[\#1B1B1B\]\/70,
+html.dark .text-\[\#1B1B1B\]\/60 {
+  color: #94A3B8 !important;
+}
+
+html.dark .text-\[\#1B1B1B\]\/30 {
+  color: #64748B !important;
+}
+
+html.dark .text-[#8C8880]\/30 {
+  color: rgba(203, 213, 225, 0.4) !important;
+}
+
+/* Dark Mode Borders */
+html.dark .border-\[\#D9D7D0\],
+html.dark .border-\[\#D9D7D0\]\/60,
+html.dark .border-\[\#D9D7D0\]\/50,
+html.dark .border-\[\#D9D7D0\]\/40,
+html.dark .border-\[\#D9D7D0\]\/30 {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Dark Mode Buttons & Interactive Controls FIX */
+html.dark button.bg-\[\#181818\],
+html.dark a.bg-\[\#181818\],
+html.dark button.bg-black {
+  background-color: #F3F4F6 !important;
+  color: #0B0F17 !important;
+  border: 1px solid #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15) !important;
+}
+
+html.dark button.bg-\[\#181818\]:hover,
+html.dark a.bg-\[\#181818\]:hover,
+html.dark button.bg-black:hover {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Secondary light buttons turn into dark subtle cards */
+html.dark button.bg-\[\#F0EFEB\],
+html.dark button.bg-\[\#FAF9F5\],
+html.dark a.bg-\[\#F0EFEB\] {
+  background-color: #1E2638 !important;
+  color: #F3F4F6 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark button.bg-\[\#F0EFEB\]:hover,
+html.dark button.bg-\[\#FAF9F5\]:hover,
+html.dark a.bg-\[\#F0EFEB\]:hover {
+  background-color: #2D3748 !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Header CTA "Book a Demo" button in dark mode */
+html.dark header button.bg-\[\#FAF9F5\] {
+  background-color: #FFFFFF !important;
+  color: #0B0F17 !important;
+  border: 1px solid #FFFFFF !important;
+}
+
+html.dark header button.bg-\[\#FAF9F5\]:hover {
+  background-color: #E5E7EB !important;
+}
+
+/* Monospace & Small Badges in Dark Mode */
+html.dark .bg-\[\#F0EFEB\].font-mono,
+html.dark span.bg-\[\#F0EFEB\] {
+  background-color: #1E2638 !important;
+  color: #F3F4F6 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark .bg-\[\#FAF9F5\].font-mono,
+html.dark span.bg-\[\#FAF9F5\] {
+  background-color: #263044 !important;
+  color: #F3F4F6 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark .bg-\[\#181818\].font-mono,
+html.dark span.bg-\[\#181818\] {
+  background-color: #2D3748 !important;
+  color: #F3F4F6 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Inputs & Form Fields in Dark Mode */
+html.dark input, 
+html.dark select, 
+html.dark textarea {
+  background-color: #151C28 !important;
+  color: #F3F4F6 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark input::placeholder, 
+html.dark textarea::placeholder {
+  color: #6B7280 !important;
+}
+
+html.dark input:focus, 
+html.dark textarea:focus {
+  border-color: #15803D !important;
+  outline: none !important;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FBFBFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2E4E5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #505A5F;
+}
